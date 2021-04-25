@@ -100,4 +100,6 @@ source $ZSH/oh-my-zsh.sh
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 
+alias kingspeak="ssh u0972673@kingspeak.chpc.utah.edu"
+
 neofetch
