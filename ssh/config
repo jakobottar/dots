@@ -1,4 +1,0 @@
-host kings
-  hostname kingspeak.chpc.utah.edu
-  user u0972673
-  port 22
