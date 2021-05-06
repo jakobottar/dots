@@ -9,5 +9,5 @@ pacman -Qqe > pkglist.txt
 
 load packages with 
 ```
-sudo pacman -S - < packages.txt
+paru -S - < packages.txt
 ```
