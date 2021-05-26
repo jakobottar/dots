@@ -9,6 +9,8 @@ ZSH_THEME="jakobj" # https://gist.github.com/jakobottar/f68b43af1ce7276f30fb257c
 plugins=(git)
 source $ZSH/oh-my-zsh.sh
 
+export QT_STYLE_OVERRIDE=""
+
 neofetch
 
 # >>> conda initialize >>>
