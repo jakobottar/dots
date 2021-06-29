@@ -1,17 +1,14 @@
-# If you come from bash you might have to change your $PATH.
-# export PATH=$HOME/bin:/usr/local/bin:$PATH
-
-# Path to your oh-my-zsh installation.
+# oh-my-zsh stuff
 export ZSH="/home/jakobj/.oh-my-zsh"
-
 ZSH_THEME="jakobj" # https://gist.github.com/jakobottar/f68b43af1ce7276f30fb257c611a1289
-
 plugins=(git)
 source $ZSH/oh-my-zsh.sh
-
 export QT_STYLE_OVERRIDE=""
 
-neofetch
+# aliases
+alias vpn="protonvpn-cli"
+alias gs="git status"
+alias ca="conda activate"
 
 # >>> conda initialize >>>
 # !! Contents within this block are managed by 'conda init' !!
@@ -28,3 +25,4 @@ fi
 unset __conda_setup
 # <<< conda initialize <<<
 
+neofetch
