@@ -11,5 +11,10 @@ env:
 # change font
 font: 
   normal:
-    family: Fira Code
-  size: 10.5
+    family: Fira Code Nerd Font
+  size: 13
+
+window:
+  dimensions:
+   columns: 100
+   lines: 40
