@@ -8,6 +8,6 @@ export QT_STYLE_OVERRIDE=""
 # aliases
 alias vpn="protonvpn-cli"
 alias gs="git status"
-alias ca="conda activate"
 
+# python venv activation shortcut
 venv-activate() { source $1/bin/activate }
