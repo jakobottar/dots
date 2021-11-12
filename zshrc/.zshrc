@@ -11,3 +11,6 @@ alias gs="git status"
 
 # python venv activation shortcut
 venv-activate() { source $1/bin/activate }
+
+# borg backup stuff
+export BORG_REPO=ssh://bacman@jakobj.dev:1985//backups/$HOST
