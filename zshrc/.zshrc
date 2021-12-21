@@ -1,5 +1,5 @@
 # oh-my-zsh
-export ZSH="/home/jakobj/.oh-my-zsh"
+export ZSH="$HOME/.oh-my-zsh"
 ZSH_THEME="jakobj" # https://gist.github.com/jakobottar/f68b43af1ce7276f30fb257c611a1289
 plugins=(git)
 source $ZSH/oh-my-zsh.sh
