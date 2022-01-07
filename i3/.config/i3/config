@@ -198,6 +198,10 @@ bar {
 
 # set the background
 exec --no-startup-id ~/.fehbg &
+# change the background with feh --bg-scale ./path/to/bg/image
+
+#Screenshots
+bindsym Print exec maim -s | xclip -selection clipboard -t image/png
 
 # lock the screen
 bindsym $mod+l exec slock
