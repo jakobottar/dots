@@ -200,6 +200,10 @@ bar {
 exec --no-startup-id ~/.fehbg &
 # change the background with feh --bg-scale ./path/to/bg/image
 
+# launch programs on startup
+exec --no-startup-id dropbox
+# exec --no-startup-id protonmail-bridge
+
 #Screenshots
 bindsym Print exec maim -s | xclip -selection clipboard -t image/png
 
