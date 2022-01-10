@@ -18,7 +18,7 @@ order += "battery all"
 # order += "volume master"
 # order += "disk /"
 # order += "cpu_usage"
-order += "cpu_temperature 0"
+# order += "cpu_temperature 0"
 # order += "memory"
 order += "tztime local"
 
@@ -54,7 +54,7 @@ cpu_usage {
 
 cpu_temperature 0 {
         format = "🌡️ %degrees °C"
-        path = "/sys/class/hwmon/hwmon5/temp1_input"
+        path = "/sys/class/hwmon/hwmon5/temp1_input" # TODO: find the right file
         max_threshold = 70
         format_above_threshold = "🧯 %degrees °C"
 }
