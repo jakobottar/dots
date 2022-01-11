@@ -197,8 +197,8 @@ bar {
 ## ===== CUSTOM ===== 
 
 # set the background
-exec --no-startup-id ~/.fehbg &
-# change the background with feh --bg-scale ./path/to/bg/image
+# exec --no-startup-id ~/.fehbg &
+feh --bg-scale ./Dropbox/Media/Photos/Wallpapers/Landscapes/little_cottonwood.jpg
 
 # launch programs on startup
 exec --no-startup-id dropbox
