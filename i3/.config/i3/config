@@ -225,6 +225,8 @@ client.urgent       $red               $bg                 $text                
 # border
 for_window [class="^.*"] border pixel 2 
 
+exec --no-startup-id picom -d
+
 # gaps
 gaps inner 5 
 gaps outer 5
