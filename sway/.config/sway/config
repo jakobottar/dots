@@ -5,10 +5,10 @@
 # Alt key. Use Mod4 for Win key.
 set $mod Mod1
 # Home row direction keys, like vim
-set $left h
-set $down j
-set $up k
-set $right l
+set $left left
+set $down down
+set $up up
+set $right right
 # Your preferred terminal emulator
 set $term kitty
 # Your preferred application launcher
@@ -55,9 +55,8 @@ output * bg ~/Dropbox/Media/Photos/Wallpapers/Misc/DSC_6002.jpg fill
 # Read `man 5 sway-input` for more information about this section.
 
 ### Key bindings
-#
+
 # Basics:
-#
     # Start a terminal
     bindsym $mod+Return exec $term
 
@@ -79,30 +78,25 @@ output * bg ~/Dropbox/Media/Photos/Wallpapers/Misc/DSC_6002.jpg fill
 
     # Exit sway (logs you out of your Wayland session)
     bindsym $mod+Shift+e exec swaynag -t warning -m 'You pressed the exit shortcut. Do you really want to exit sway? This will end your Wayland session.' -B 'Yes, exit sway' 'swaymsg exit'
-#
+
+    # printscreen
+    bindsym Print exec maim -s | xclip -selection clipboard -t image/png # TODO: black screen
+
+    # lock the screen
+    bindsym $mod+l exec slock # TODO: broken
+
 # Moving around:
-#
     # Move your focus around
     bindsym $mod+$left focus left
     bindsym $mod+$down focus down
     bindsym $mod+$up focus up
     bindsym $mod+$right focus right
-    # Or use $mod+[up|down|left|right]
-    bindsym $mod+Left focus left
-    bindsym $mod+Down focus down
-    bindsym $mod+Up focus up
-    bindsym $mod+Right focus right
 
     # Move the focused window with the same, but add Shift
     bindsym $mod+Shift+$left move left
     bindsym $mod+Shift+$down move down
     bindsym $mod+Shift+$up move up
     bindsym $mod+Shift+$right move right
-    # Ditto, with arrow keys
-    bindsym $mod+Shift+Left move left
-    bindsym $mod+Shift+Down move down
-    bindsym $mod+Shift+Up move up
-    bindsym $mod+Shift+Right move right
 
 # Workspaces:
     # Switch to workspace
@@ -176,17 +170,29 @@ mode "resize" {
     bindsym $up resize shrink height 10px
     bindsym $right resize grow width 10px
 
-    # Ditto, with arrow keys
-    bindsym Left resize shrink width 10px
-    bindsym Down resize grow height 10px
-    bindsym Up resize shrink height 10px
-    bindsym Right resize grow width 10px
-
     # Return to default mode
     bindsym Return mode "default"
     bindsym Escape mode "default"
 }
 bindsym $mod+r mode "resize"
+
+# Special Keys
+    # Use pactl to adjust volume in PulseAudio.
+    set $refresh_i3status killall -SIGUSR1 i3status
+    bindsym XF86AudioRaiseVolume exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ +10% && $refresh_i3status
+    bindsym XF86AudioLowerVolume exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ -10% && $refresh_i3status
+    bindsym XF86AudioMute exec --no-startup-id pactl set-sink-mute @DEFAULT_SINK@ toggle && $refresh_i3status
+    bindsym XF86AudioMicMute exec --no-startup-id pactl set-source-mute @DEFAULT_SOURCE@ toggle && $refresh_i3status
+
+    # screen brightness
+    bindsym XF86MonBrightnessDown exec brightnessctl set 10%-
+    bindsym XF86MonBrightnessUp exec brightnessctl set 10%+
+
+# Launch at startup
+    exec_always --no-startup-id autotiling 
+    exec --no-startup-id dropbox
+    # exec --no-startup-id protonmail-bridge # TODO: find a way to supress the GUI popup
+    exec --no-startup-id sudo anacron # need to add anacron to PASSWORDLESS in sudoers file https://unix.stackexchange.com/questions/248485/allow-all-commands-via-sudo-but-nopasswd-for-specific-commands/248495#248495
 
 # colors
 set $bg 	    #2E3440
@@ -232,4 +238,3 @@ input type:touchpad {
 }
 
 include @sysconfdir@/sway/config.d/*
-
