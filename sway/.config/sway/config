@@ -16,6 +16,8 @@ set $term kitty
 # on the original workspace that the command was run on.
 set $menu dmenu_path | dmenu | xargs swaymsg exec --
 
+set $lock swaylock --screenshots --effect-blur 5x5
+
 ### Output configuration
 #
 # Default wallpaper (more resolutions are available in @datadir@/backgrounds/sway/)
@@ -26,19 +28,6 @@ output * bg ~/Dropbox/Media/Photos/Wallpapers/Misc/DSC_6002.jpg fill
 #   output HDMI-A-1 resolution 1920x1080 position 1920,0
 #
 # You can get the names of your outputs by running: swaymsg -t get_outputs
-
-### Idle configuration
-#
-# Example configuration:
-#
-# exec swayidle -w \
-#          timeout 300 'swaylock -f -c 000000' \
-#          timeout 600 'swaymsg "output * dpms off"' resume 'swaymsg "output * dpms on"' \
-#          before-sleep 'swaylock -f -c 000000'
-#
-# This will lock your screen after 300 seconds of inactivity, then turn off
-# your displays after another 300 seconds, and turn your screens back on when
-# resumed. It will also lock your screen before your computer goes to sleep.
 
 ### Input configuration
 #
@@ -83,7 +72,7 @@ output * bg ~/Dropbox/Media/Photos/Wallpapers/Misc/DSC_6002.jpg fill
     bindsym Print exec maim -s | xclip -selection clipboard -t image/png # TODO: black screen
 
     # lock the screen
-    bindsym $mod+l exec slock # TODO: broken
+    bindsym $mod+l exec $lock
 
 # Moving around:
     # Move your focus around
@@ -234,7 +223,14 @@ bar {
 
 # reverse touchpad scrolling
 input type:touchpad {
+    dwt enabled
     natural_scroll enabled
 }
+
+# Idle configuration
+exec swayidle -w \
+         timeout 300 'swaylock -f --screenshots --effect-blur 5x5' \
+         timeout 600 'swaymsg "output * dpms off"' resume 'swaymsg "output * dpms on"' \
+         before-sleep 'swaylock -f --screenshots --effect-blur 5x5'
 
 include @sysconfdir@/sway/config.d/*

@@ -1,0 +1,15 @@
+# /etc/systemd/system/swaylock@.service
+# enable with systemctl enable swaylock@user.service
+
+[Unit]
+Description=Lock Wayland session using swaylock for user %i
+Before=sleep.target
+
+[Service]
+User=%i
+Environment=WAYLAND_DISPLAY=wayland-0
+# Environment=XAUTHORITY=/run/user/1000/gdm/Xauthority
+ExecStart=/usr/bin/slock
+
+[Install]
+WantedBy=sleep.target
