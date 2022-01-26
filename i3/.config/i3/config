@@ -156,7 +156,7 @@ exec_always --no-startup-id ~/.fehbg &
 # set with feh --bg-scale /path/to/image
 
 # enable autotiling
-exec --no-startup-id autotiling
+exec_always --no-startup-id autotiling
 
 # launch programs on startup
 exec --no-startup-id dropbox
