@@ -11,5 +11,5 @@ RANDOM_DELAY=0
 START_HOURS_RANGE=3-22
 
 #period in days   	delay in minutes   	job-identifier  command
-1			15			backup-borg	sh /root/borg.sh
-7			30			backup-offsite  sh /root/borg-offsite.sh
+1			15			backup-borg	/root/borg.sh
+1			30			backup-offsite  /root/borg-offsite.sh
