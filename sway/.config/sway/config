@@ -12,14 +12,14 @@ set $right right
 # Terminal emulator
 set $term kitty
 # Application launcher
-set $menu dmenu_path | dmenu | xargs swaymsg exec --
+set $menu bemenu-run
 
 set $lock swaylock --screenshots --effect-blur 5x5
 
 ### Output configuration
 
     # wallpaper
-    output * bg ~/Dropbox/Media/Photos/Wallpapers/Misc/DSC_6002.jpg fill
+    output * bg ~/Photos/east_canyon.jpg fill
     # monitors
     output eDP-1 position 7680,0
     output 'Dell Inc. DELL P2715Q X24K177VAF6L' position 0,0
