@@ -17,4 +17,4 @@ eval "$(pyenv init -)"
 eval "$(pyenv virtualenv-init -)"
 
 # ssh keychain
-eval $(keychain --eval --quiet id_ed25519) 
+eval $(keychain --eval --quiet id_ed25519)
