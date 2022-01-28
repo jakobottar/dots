@@ -8,7 +8,6 @@ Before=sleep.target
 [Service]
 User=%i
 Environment=WAYLAND_DISPLAY=wayland-0
-# Environment=XAUTHORITY=/run/user/1000/gdm/Xauthority
 ExecStart=/usr/bin/slock
 
 [Install]
