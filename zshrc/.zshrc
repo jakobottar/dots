@@ -6,8 +6,13 @@ source $ZSH/oh-my-zsh.sh
 export QT_STYLE_OVERRIDE=""
 
 # aliases
-alias vpn="protonvpn-cli"
-alias gs="git status"
+alias vpn='protonvpn-cli'
+alias gs='git status'
+alias ga='git add -A; gs'
+alias gc='git commit -v -m'
+alias gp='git push'
+alias myip='curl ipinfo.io/ip'
+alias shutdown="shutdown now"
 
 # borg backup
 export BORG_REPO=ssh://bacman@jakobj.dev:1985//backups/$HOST

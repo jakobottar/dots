@@ -2,12 +2,12 @@
 
 ### Variables
 # colors
-set $bg 	    #3b4252
+set $bg 	#3b4252
 set $active 	#4C566A
 set $indicator  #222226
 set $green  	#82996e
 set $white      #E7E7E7
-set $text	    #eceff4
+set $text	#eceff4
 set $red    	#BF616A
 set $frost      #88c0d0
 
@@ -23,7 +23,7 @@ set $right right
 # Terminal emulator
 set $term kitty
 # Application launcher
-set $menu bemenu-run --nb "$bg" --nf "$text" --tb "$bg" --tf "$frost" --fb "$bg" --ff "$text" --hb "$bg" --hf "$frost"
+set $menu bemenu-run --nb "$bg" --nf "$text" --tb "$frost" --tf "$bg" --fb "$bg" --ff "$text" --hb "$frost" --hf "$bg"
 
 set $lock swaylock --screenshots --effect-blur 5x5
 
