@@ -11,7 +11,7 @@ set $text	#eceff4
 set $red    	#BF616A
 set $frost      #88c0d0
 
-set $font "Fira Code"
+set $font "Fira Code 11"
 
 # Alt key. Use Mod4 for Win key.
 set $mod Mod1
@@ -23,7 +23,7 @@ set $right right
 # Terminal emulator
 set $term kitty
 # Application launcher
-set $menu bemenu-run --nb "$bg" --nf "$text" --tb "$frost" --tf "$bg" --fb "$bg" --ff "$text" --hb "$frost" --hf "$bg"
+set $menu bemenu-run --fn $font --nb "$bg" --nf "$text" --tb "$frost" --tf "$bg" --fb "$bg" --ff "$text" --hb "$frost" --hf "$bg"
 
 set $lock swaylock --screenshots --effect-blur 5x5
 
@@ -204,6 +204,9 @@ default_border pixel 2
 # gaps
 gaps inner 5
 gaps outer 5
+
+# font
+font $font
 
 # start i3bar
 bar {
