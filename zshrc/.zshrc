@@ -14,7 +14,9 @@ alias gp='git push'
 alias myip='curl ipinfo.io/ip'
 alias shutdown='shutdown now'
 alias p='ping -i 0.2 -O sci.utah.edu'
-alias zzz='systemctl suspend'
+alias zzz='systemctl hibernate'
+
+alias ls="exa"
 
 # borg backup
 export BORG_REPO=ssh://bacman@jakobj.dev:1985//backups/$HOST
@@ -24,4 +26,4 @@ eval "$(pyenv init -)"
 eval "$(pyenv virtualenv-init -)"
 
 # ssh keychain
-eval $(keychain --eval --quiet id_ed25519)
+# eval $(keychain --eval --quiet id_ed25519)
