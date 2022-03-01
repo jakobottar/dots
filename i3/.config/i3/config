@@ -161,6 +161,7 @@ exec_always --no-startup-id autotiling
 exec --no-startup-id dropbox
 # exec --no-startup-id protonmail-bridge # TODO: find a way to supress the GUI popup
 exec --no-startup-id sudo anacron # need to add anacron to PASSWORDLESS in sudoers file https://unix.stackexchange.com/questions/248485/allow-all-commands-via-sudo-but-nopasswd-for-specific-commands/248495#248495
+exec ~/.screenlayout/layout.sh
 
 #Screenshots
 bindsym Print exec maim -s | xclip -selection clipboard -t image/png
