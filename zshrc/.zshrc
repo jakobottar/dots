@@ -15,8 +15,10 @@ alias myip='curl ipinfo.io/ip'
 alias shutdown='shutdown now'
 alias p='ping -i 0.2 -O sci.utah.edu'
 alias zzz='systemctl hibernate'
+alias todo='vim ~/TODO.txt'
 
-alias ls="exa"
+alias ls='exa'
+alias neofetch='flashfetch'
 
 # borg backup
 export BORG_REPO=ssh://bacman@jakobj.dev:1985//backups/$HOST
