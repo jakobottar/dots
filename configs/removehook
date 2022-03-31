@@ -1,0 +1,4 @@
+#!/bin/sh
+# ~/.local/tools/removehook
+yaycache="$(find $(yay -Pg | jq -r .buildDir) -maxdepth 1 -type d | awk '{ print "-c " $1 }' | tail -n +2)"
+/usr/bin/paccache -ruvk0 $yaycache
