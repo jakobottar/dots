@@ -9,4 +9,4 @@ Target = *
 [Action]
 Description = Cleaning Pacman Cache...
 When = PostTransaction
-Exec = /home/<user>/.local/tools/removehook
+Exec = /home/jakobj/.local/tools/removehook

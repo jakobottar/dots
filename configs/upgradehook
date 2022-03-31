@@ -1,4 +1,6 @@
 #!/bin/sh
 # ~/.local/tools/upgradehook
-yaycache="$(find $(yay -Pg | jq -r .buildDir) -maxdepth 1 -type d | awk '{ print "-c " $1 }' | tail -n +2)"
+
+# TODO: change to $HOME or (yay -Pg | jq -r .buildDir)
+yaycache="$(find /home/jakobj/.cache/yay -maxdepth 1 -type d | awk '{ print "-c " $1 }' | tail -n +2)"
 /usr/bin/paccache -rvk1 -c /var/cache/pacman/pkg $yaycache
