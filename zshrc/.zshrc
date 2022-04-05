@@ -7,8 +7,8 @@ export QT_STYLE_OVERRIDE=""
 
 # aliases
 alias vpn='protonvpn-cli'
-alias gs='git status'
-alias ga='git add -A; gs'
+alias gs='git fetch; git status'
+alias ga='git add -A; git status'
 alias gc='git commit -S -v -m'
 alias gp='git push'
 alias myip='curl ipinfo.io/ip'
