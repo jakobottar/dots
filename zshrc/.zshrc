@@ -29,4 +29,3 @@ eval "$(pyenv virtualenv-init -)"
 
 # ssh keychain
 # eval $(keychain --eval --quiet id_ed25519)
-export GPG_TTY=$(tty)
