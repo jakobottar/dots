@@ -27,5 +27,3 @@ export BORG_REPO=ssh://bacman@jakobj.dev:1985//backups/$HOST
 eval "$(pyenv init -)"
 eval "$(pyenv virtualenv-init -)"
 
-# ssh keychain
-# eval $(keychain --eval --quiet id_ed25519)

@@ -2,12 +2,12 @@
 
 ### Variables
 # colors
-set $bg 	#3b4252
+set $bg 	    #3b4252
 set $active 	#4C566A
 set $indicator  #222226
 set $green  	#82996e
 set $white      #E7E7E7
-set $text	#eceff4
+set $text	    #eceff4
 set $red    	#BF616A
 set $frost      #88c0d0
 
@@ -15,7 +15,7 @@ set $font "Fira Code 11"
 
 # Alt key. Use Mod4 for Win key.
 set $mod Mod1
-# Home row direction keys, like vim
+# Arrow keys
 set $left left
 set $down down
 set $up up
@@ -31,7 +31,7 @@ set $lock swaylock --screenshots --effect-blur 5x5
 
     # wallpaper
     output * bg ~/Photos/snow-canyon-sunrise.jpg fill
-    # monitors
+    # monitors #TODO: make ws 1 and 2 move to these displays
     output eDP-1 position 7680,0
     output 'Dell Inc. DELL P2715Q X24K177VAF6L' position 0,0
     output 'Dell Inc. DELL P2715Q X24K177VACVL' position 3840,0
@@ -187,13 +187,14 @@ bindsym $mod+r mode "resize"
     bindsym XF86MonBrightnessDown exec brightnessctl set 10%-
     bindsym XF86MonBrightnessUp exec brightnessctl set 10%+
 
+    # TODO: set "display" key to toggle mirroring
+
 ## Misc Stuff
 
 # Launch at startup
     exec --no-startup-id nm-applet
     exec --no-startup-id autotiling
     exec --no-startup-id dropbox
-    # exec --no-startup-id protonmail-bridge # TODO: find a way to supress the GUI popup
     exec --no-startup-id sudo anacron # need to add anacron to PASSWORDLESS in sudoers file https://unix.stackexchange.com/questions/248485/allow-all-commands-via-sudo-but-nopasswd-for-specific-commands/248495#248495
 
 # Theme
@@ -229,7 +230,8 @@ bindsym $mod+r mode "resize"
     }
 
 # Idle configuration
+    # 5 min lock, 30 min sleep
     exec swayidle -w \
-            timeout 300 'swaylock -f --screenshots --effect-blur 5x5' \
-            timeout 1800 'swaymsg "output * dpms off"' resume 'swaymsg "output * dpms on"' \
-            before-sleep 'swaylock -f --screenshots --effect-blur 5x5'
+        timeout 300 'swaylock -f --screenshots --effect-blur 5x5' \
+        timeout 1800 'swaymsg "output * dpms off"' resume 'swaymsg "output * dpms on"' \
+        before-sleep 'swaylock -f --screenshots --effect-blur 5x5'
