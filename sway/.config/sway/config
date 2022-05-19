@@ -14,7 +14,7 @@ set $frost      #88c0d0
 set $font "Fira Code 11"
 
 # Alt key. Use Mod4 for Win key.
-set $mod Mod1
+set $mod Mod4
 # Arrow keys
 set $left left
 set $down down
