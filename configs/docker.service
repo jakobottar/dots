@@ -1,0 +1,15 @@
+# /etc/systemd/system/docker.service
+[Unit]
+Description=Docker Container Autostart
+Requires=docker.service
+After=docker.service
+
+# start the container with docker run -d --name container_name container
+[Service]
+Restart=always
+RestartSec=10
+ExecStart=/usr/bin/docker start -a container_name
+ExecStop=/usr/bin/docker stop -t 2 container_name
+
+[Install]
+WantedBy=default.target
