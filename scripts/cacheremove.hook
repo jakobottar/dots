@@ -1,0 +1,12 @@
+# /etc/pacman.d/hooks/cacheremove.hook
+# yay stuff from https://gist.github.com/luukvbaal/2c697b5e068471ee989bff8a56507142
+
+[Trigger]
+    Operation = Remove
+    Type = Package
+    Target = *
+
+[Action]
+    Description = Cleaning Pacman Cache...
+    When = PostTransaction
+    Exec = /home/jakobj/.dots/scripts/removehook.sh
