@@ -30,7 +30,7 @@ set $lock swaylock --screenshots --effect-blur 5x5
 ### Output configuration
 
     # wallpaper
-    output * bg ~/Photos/snow-canyon-sunrise.jpg fill
+    output * bg ~/Photos/sabot.jpg fill
     # monitors #TODO: make ws 1 and 2 move to these displays
     output eDP-1 position 7680,0
     output 'Dell Inc. DELL P2715Q X24K177VAF6L' position 0,0
