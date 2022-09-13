@@ -213,21 +213,10 @@ bindsym $mod+r mode "resize"
     # font
     font $font
 
-# i3 bar
+# menu bar
     bar {
-        colors {
-            background $bg
-            statusline $text
-            separator  $text
-
-            #                   border  	bg      	text
-            focused_workspace	$frost		$frost 		$active
-            active_workspace  	$active 	$active 	$text
-            inactive_workspace  $bg 		$bg 		$text
-            urgent_workspace  	$red		$red		$text
-        }
-            status_command i3status -c ~/.config/i3status/config
-    }
+        swaybar_command waybar
+    } 
 
 # Idle configuration
     # 5 min lock, 30 min sleep

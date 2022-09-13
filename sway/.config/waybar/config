@@ -1,0 +1,70 @@
+{
+    "position": "bottom",
+    "layer": "top",
+    "spacing": "4",
+    "modules-left": [
+        "sway/workspaces",
+        "sway/mode"
+    ],
+    "modules-center": [
+        "sway/window"
+    ],
+    "modules-right": [
+        "clock",
+        "network",
+        "temperature",
+        "pulseaudio",
+        "battery"
+    ],
+    "sway/window": {
+        "max-length": 50
+    },
+    "clock": {
+        "format": "{:%a %b %d  %I:%M %p}"
+    },
+    "network": {
+        "format-wifi": "📻 {essid}",
+        "format-ethernet": "🔌 {ipaddr}/{cidr}",
+        "tooltip-format": "{ifname} via {gwaddr}",
+        "format-linked": "{ifname} (No IP)",
+        "format-disconnected": "👎 down",
+        "format-alt": "{ifname}: {ipaddr}/{cidr}"
+    },
+    "temperature": {
+        "thermal-zone": 2,
+        "hwmon-path": "/sys/class/hwmon/hwmon2/temp1_input",
+        "critical-threshold": 80,
+        "format-critical": "{icon} {temperatureC}°C",
+        "format": "{icon} {temperatureC}°C",
+        "format-icons": [
+            "🥶",
+            "😀",
+            "🥵"
+        ]
+    },
+    "pulseaudio": {
+        "format": "{icon} {volume}%",
+        "format-muted": "🔇 muted",
+        "format-icons": {
+            "headphone": "🎧",
+            "default": [
+                "🔈",
+                "🔉",
+                "🔊"
+            ]
+        }
+    },
+    "battery": {
+        "states": {
+            "warning": 30,
+            "critical": 15
+        },
+        "format": "{icon} {capacity}%",
+        "format-charging": "⚡ {capacity}%",
+        "format-alt": "{time} {icon}",
+        "format-icons": [
+            "🪫",
+            "🔋"
+        ]
+    }
+}
