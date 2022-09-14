@@ -2,15 +2,24 @@
 
 ### Variables
 # colors
-set $bg 	    #3b4252
-set $active 	#4C566A
-set $indicator  #222226
-set $green  	#82996e
-set $white      #E7E7E7
-set $text	    #eceff4
-set $red    	#BF616A
-set $frost      #88c0d0
+set $bg 	    #24273a
+set $crust      #181926
+set $text	    #cad3f5
+set $active 	#b7bdf8
+set $inactive   #6e738d
+set $indicator  #eed49f
+set $red    	#ed8796
 
+set $mantle     #1e2030
+set $surface0   #363a4f
+set $surface1   #494d64
+set $surface2   #5b6078
+set $rosewater  #f4dbd6
+set $green      #a6da95
+set $peach      #f5a97f
+set $maroon     #ee99a0
+set $blue       #8aadf4
+set $mauve      #c6a0f6
 set $font "Fira Code 11"
 
 # Alt key. Use Mod4 for Win key.
@@ -23,7 +32,13 @@ set $right right
 # Terminal emulator
 set $term kitty
 # Application launcher
-set $menu bemenu-run --fn $font --nb "$bg" --nf "$text" --tb "$frost" --tf "$bg" --fb "$bg" --ff "$text" --hb "$frost" --hf "$bg"
+# https://github.com/Cloudef/bemenu/blob/master/man/bemenu.1.scd.in#L123-L161
+set $menu bemenu-run --fn $font --nb "$mantle" --nf "$text" \
+                     --ab "$surface0" --af "$text" \
+                     --tb "$green" --tf "$crust" \
+                     --cb "$crust" --cf "$rosewater" \
+                     --fb "$mantle" --ff "$text" \
+                     --hb "$blue" --hf "$crust"
 
 set $lock swaylock --screenshots --effect-blur 5x5
 
@@ -198,10 +213,10 @@ bindsym $mod+r mode "resize"
     # exec --no-startup-id sudo anacron # need to add anacron to PASSWORDLESS in sudoers file https://unix.stackexchange.com/questions/248485/allow-all-commands-via-sudo-but-nopasswd-for-specific-commands/248495#248495
 
 # Theme
-    # window color      border  background  text    indicator
-    client.focused      $white  $white      $text   $indicator
-    client.unfocused    $bg     $bg         $text   $indicator
-    client.urgent       $red    $bg         $text   $indicator
+    # window color      border      background  text    indicator
+    client.focused      $active     $active     $text   $indicator
+    client.unfocused    $inactive   $inactive   $text   $indicator
+    client.urgent       $red        $bg         $text   $indicator
 
     # hide menu bars
     default_border pixel 2
