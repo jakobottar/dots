@@ -209,6 +209,7 @@ bindsym $mod+r mode "resize"
 # Launch at startup
     exec --no-startup-id nm-applet
     exec --no-startup-id autotiling
+    exec --no-startup-id swaync -c ~/.config/swaync/config.json
     exec --no-startup-id dropbox
     # exec --no-startup-id sudo anacron # need to add anacron to PASSWORDLESS in sudoers file https://unix.stackexchange.com/questions/248485/allow-all-commands-via-sudo-but-nopasswd-for-specific-commands/248495#248495
 

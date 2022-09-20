@@ -128,3 +128,7 @@ label:focus {
 #temperature.critical {
     background-color: @red;
 }
+
+#tray {
+    background-color: @flamingo;
+}

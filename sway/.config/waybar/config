@@ -14,7 +14,8 @@
         "network",
         "temperature",
         "pulseaudio",
-        "battery"
+        "battery",
+        "tray"
     ],
     "sway/window": {
         "max-length": 50
@@ -33,7 +34,8 @@
     "temperature": {
         "thermal-zone": 2,
         "critical-threshold": 80,
-        "format-critical": "{icon} {temperatureC}°C",
+        "hwmon-path": "/sys/class/hwmon/hwmon4/temp1_input",
+        "format-critical": "🔥 {temperatureC}°C",
         "format": "{icon} {temperatureC}°C",
         "format-icons": [
             "🥶",
@@ -65,5 +67,9 @@
             "🪫",
             "🔋"
         ]
+    },
+    "tray": {
+        "icon-size": 17,
+        "spacing": 10
     }
 }
