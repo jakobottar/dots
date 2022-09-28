@@ -46,8 +46,13 @@ set $lock swaylock --screenshots --effect-blur 5x5
 
     # wallpaper
     output * bg ~/Photos/sabot.jpg fill
-    # monitors #TODO: make ws 1 and 2 move to these displays
-    output eDP-1 position 7680,0
+
+    # clamshell mode https://github.com/swaywm/sway/wiki#clamshell-mode
+    set $laptop eDP-1
+    bindswitch --reload --locked lid:on output $laptop disable
+    bindswitch --reload --locked lid:off output $laptop enable
+
+    # work monitors
     output 'Dell Inc. DELL P2715Q X24K177VAF6L' position 0,0
     output 'Dell Inc. DELL P2715Q X24K177VACVL' position 3840,0
 
@@ -210,6 +215,7 @@ bindsym $mod+r mode "resize"
     exec --no-startup-id nm-applet
     exec --no-startup-id autotiling
     exec --no-startup-id swaync -c ~/.config/swaync/config.json
+    exec --no-startup-id blueman-applet
     exec --no-startup-id dropbox
     # exec --no-startup-id sudo anacron # need to add anacron to PASSWORDLESS in sudoers file https://unix.stackexchange.com/questions/248485/allow-all-commands-via-sudo-but-nopasswd-for-specific-commands/248495#248495
 
