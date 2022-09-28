@@ -12,7 +12,7 @@
     "modules-right": [
         "clock",
         "network",
-        "temperature",
+        "cpu",
         "pulseaudio",
         "battery",
         "tray"
@@ -30,6 +30,11 @@
         "format-linked": "{ifname} (No IP)",
         "format-disconnected": "👎 down",
         "format-alt": "{ifname}: {ipaddr}/{cidr}"
+    },
+    "cpu": {
+        "interval": 1,
+        "format": "🚀 {usage}%",
+        "max-length": 15
     },
     "temperature": {
         "thermal-zone": 2,

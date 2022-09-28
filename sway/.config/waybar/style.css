@@ -49,7 +49,9 @@ window#waybar {
 #battery,
 #temperature,
 #network,
-#pulseaudio {
+#pulseaudio,
+#cpu,
+#tray {
     padding: 0 5px;
     color: @crust;
 }
@@ -117,7 +119,7 @@ label:focus {
     background-color: @yellow;
 }
 
-#pulseaudio.muted {
+#cpu {
     background-color: @teal;
 }
 
