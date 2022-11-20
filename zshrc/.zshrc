@@ -9,8 +9,8 @@ export QT_STYLE_OVERRIDE=""
 alias vpn='protonvpn-cli'
 alias gs='git fetch; git status'
 alias ga='git add -A; git status'
-alias gc='git commit -S'
-alias gcf='git commit -S --fixup'
+alias gc='git commit -S -m'
+alias gcf='git commit -S --fixup
 alias gp='git push'
 alias myip='curl ipinfo.io/ip'
 alias shutdown='shutdown now'
@@ -28,3 +28,5 @@ export BORG_REPO=ssh://bacman@jakobj.dev:1985//backups/$HOST
 eval "$(pyenv init -)"
 eval "$(pyenv virtualenv-init -)"
 
+# launch keychain
+eval $(keychain --eval --quiet id_ed25519)

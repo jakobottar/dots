@@ -54,6 +54,7 @@ window#waybar {
 #tray {
     padding: 0 5px;
     color: @crust;
+    border-radius: 0;
 }
 
 #window,
