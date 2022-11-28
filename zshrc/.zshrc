@@ -14,6 +14,7 @@ alias gp='git push'
 
 alias dcb='docker-compose build'
 alias dcu='docker-compose up -d'
+alias dcd='docker-compose down'
 
 alias vpn='protonvpn-cli'
 alias myip='curl ipinfo.io/ip'
