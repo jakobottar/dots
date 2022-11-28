@@ -6,12 +6,16 @@ source $ZSH/oh-my-zsh.sh
 export QT_STYLE_OVERRIDE=""
 
 # aliases
-alias vpn='protonvpn-cli'
 alias gs='git fetch; git status'
 alias ga='git add -A; git status'
 alias gc='git commit -S -m'
 alias gcf='git commit -S --fixup'
 alias gp='git push'
+
+alias dcb='docker-compose build'
+alias dcu='docker-compose up -d'
+
+alias vpn='protonvpn-cli'
 alias myip='curl ipinfo.io/ip'
 alias shutdown='shutdown now'
 alias p='ping -i 0.2 -O sci.utah.edu'
