@@ -1,0 +1,37 @@
+#!/bin/bash
+
+# make a ntfy topic and set it here
+url="ntfy.sh/sci-run-noti" 
+
+# send message upon completion or failure
+ntfy_me() {
+	# if exit status is nonzero, notify me the run failed
+	if [ $1 -ne 0 ]; then
+		curl -s \
+			-H "Title: Run Failed!" \
+			-H "Tags: facepalm" \
+			-d "Run ${2} failed, you should go check it." \
+			$url > /dev/null
+		exit $1
+	fi
+
+	# otherwise, notify me the run is done 
+	curl -s \
+		-H "Title: Run Finished Successfully!" \
+		-H "Tags: partying_face" \
+		-d "Run ${2} finished." \
+		$url
+}
+
+if [ $# -lt 2 ]; then 
+    echo "ntfy: please specify at least two args: message & program"
+    exit -1
+fi
+
+# get ntfy message/run name
+msg="$1"
+shift
+
+# run command and notify based on return value
+eval "$@"
+ntfy_me "$?" "$msg" > /dev/null
