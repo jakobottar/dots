@@ -2,9 +2,9 @@
 
 ### Variables
 # colors
-set $bg 	    #24273a
+set $bg         #24273a
 set $crust      #181926
-set $text	    #cad3f5
+set $text	#cad3f5
 set $active 	#b7bdf8
 set $inactive   #6e738d
 set $indicator  #eed49f
@@ -40,7 +40,7 @@ set $menu bemenu-run --fn $font --nb "$mantle" --nf "$text" \
                      --fb "$mantle" --ff "$text" \
                      --hb "$blue" --hf "$crust"
 
-# set $lock swaylock --color "$mantle"
+# swaylock config
 set $lock swaylock \
 	--screenshots \
     --grace 2 \
@@ -53,7 +53,6 @@ set $lock swaylock \
 	--effect-blur 5x5 \
 	--effect-vignette 0.75:0.75 \
 	--fade-in 0.2 \
-    \
 	--key-hl-color "$red" \
     \
     --text-color "$text" \
@@ -81,7 +80,7 @@ set $lock swaylock \
 ### Output configuration
 
     # wallpaper
-    output * bg ~/Photos/sabot.jpg fill
+    output * bg ~/Photos/beav.jpg fill
 
     # clamshell mode https://github.com/swaywm/sway/wiki#clamshell-mode
     set $laptop eDP-1
