@@ -1,4 +1,6 @@
 #!/bin/bash
+# uses ntfy.sh to push-notify on script run/failure
+# usage: ntfy <message> <command>
 
 # make a ntfy topic and set it here
 url="ntfy.sh/sci-run-noti" 
