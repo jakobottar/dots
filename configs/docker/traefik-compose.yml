@@ -1,0 +1,26 @@
+networks:
+  web:
+    driver: bridge
+
+services:
+  traefik:
+    container_name: traefik
+
+    image: traefik:latest
+
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+      - ./traefik.yml:/config/traefik.yml
+      - ./nextcloud.yml:/dyn_conf/nextcloud.yml
+      - ./acme.json:/acme.json # must be 600 permissions
+
+    ports:
+      - 80:80
+      - 443:443
+
+    command: --api.insecure=true --configFile=/config/traefik.yml
+
+    networks:
+      - web
+
+    restart: unless-stopped

@@ -1,0 +1,163 @@
+- id: '1659754137147'
+  alias: Jakob's Room Motion Lights
+  description: Turn on Jakob's Room lights if it's not nighttime
+  trigger:
+  - platform: state
+    entity_id: binary_sensor.lumi_lumi_motion_ac02_5d714900_ias_zone
+    from: 'off'
+    to: 'on'
+  condition:
+  - condition: state
+    entity_id: input_boolean.nighttime
+    state: 'off'
+  action:
+  - alias: Turn on the light
+    service: light.turn_on
+    target:
+      area_id: jakob_s_room
+  - alias: Wait until there is no motion from device
+    wait_for_trigger:
+      platform: state
+      entity_id: binary_sensor.lumi_lumi_motion_ac02_5d714900_ias_zone
+      from: 'on'
+      to: 'off'
+  - alias: Wait the number of seconds that has been set
+    delay:
+      hours: 0
+      minutes: 15
+      seconds: 0
+      milliseconds: 0
+  - alias: Turn off the light
+    service: light.turn_off
+    target:
+      area_id: jakob_s_room
+  mode: restart
+  max_exceeded: silent
+- id: '1660265677548'
+  alias: Main Area Motion Lights
+  description: ''
+  trigger:
+  - platform: state
+    entity_id: binary_sensor.main_area_sensors
+    from: 'off'
+    to: 'on'
+  condition: []
+  action:
+  - service: light.turn_on
+    target:
+      area_id:
+      - living_room
+      - kitchen
+      - lamp
+      - hallway
+    data: {}
+  - wait_for_trigger:
+      platform: state
+      entity_id: binary_sensor.main_area_sensors
+      from: 'on'
+      to: 'off'
+  - delay:
+      hours: 0
+      minutes: 15
+      seconds: 0
+      milliseconds: 0
+  - service: light.turn_off
+    data: {}
+    target:
+      area_id:
+      - living_room
+      - kitchen
+      - lamp
+      - hallway
+  mode: restart
+- id: '1660265957677'
+  alias: Movie Mode - On
+  description: ''
+  trigger:
+  - platform: state
+    entity_id:
+    - input_boolean.movie_mode
+    from: 'off'
+    to: 'on'
+  condition: []
+  action:
+  - service: scene.turn_on
+    target:
+      entity_id: scene.movie_mode
+    metadata: {}
+  - service: automation.turn_off
+    data: {}
+    target:
+      entity_id: automation.main_area_motion
+  - service: automation.turn_on
+    data: {}
+    target:
+      entity_id: automation.kitchen_motion_lights
+  mode: single
+- id: '1660350249595'
+  alias: Movie Mode - Off
+  description: ''
+  trigger:
+  - platform: state
+    entity_id:
+    - input_boolean.movie_mode
+    from: 'on'
+    to: 'off'
+  condition: []
+  action:
+  - service: automation.turn_on
+    data: {}
+    target:
+      entity_id: automation.main_area_motion
+  - service: automation.turn_off
+    data: {}
+    target:
+      entity_id: automation.kitchen_motion_lights
+  - service: light.turn_on
+    data: {}
+    target:
+      area_id:
+      - hallway
+      - kitchen
+      - living_room
+      - lamp
+  - service: adaptive_lighting.apply
+    data:
+      entity_id: switch.adaptive_lighting_adaptive_lighting
+  mode: single
+- id: '1660350249599'
+  alias: Kitchen Motion Lights
+  description: Dimmed, for movie mode
+  trigger:
+  - platform: state
+    entity_id: binary_sensor.main_area_sensors
+    from: 'off'
+    to: 'on'
+  condition: []
+  action:
+  - service: adaptive_lighting.set_manual_control
+    data:
+      entity_id: switch.adaptive_lighting_adaptive_lighting
+  - service: light.turn_on
+    target:
+      area_id:
+      - kitchen
+    data:
+      brightness_pct: 33
+      color_temp: 500
+  - wait_for_trigger:
+      platform: state
+      entity_id: binary_sensor.main_area_sensors
+      from: 'on'
+      to: 'off'
+  - delay:
+      hours: 0
+      minutes: 1
+      seconds: 0
+      milliseconds: 0
+  - service: light.turn_off
+    data: {}
+    target:
+      area_id:
+      - kitchen
+  mode: restart

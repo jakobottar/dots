@@ -1,0 +1,29 @@
+networks:
+  traefik_web:
+    external: true
+
+volumes:
+  nextcloud_aio_mastercontainer:
+    name: nextcloud_aio_mastercontainer
+
+services:
+  nextcloud:
+    container_name: nextcloud-aio-mastercontainer
+
+    image: nextcloud/all-in-one:latest
+
+    ports:
+      - 8080:8080
+    networks:
+      - traefik_web
+
+    volumes:
+      - nextcloud_aio_mastercontainer:/mnt/docker-aio-config
+      - /var/run/docker.sock:/var/run/docker.sock:ro
+
+    environment:
+      - NEXTCLOUD_DATADIR=/hdd/nc
+      - APACHE_PORT=11000
+      - APACHE_IP_BINDING=0.0.0.0
+
+    restart: unless-stopped

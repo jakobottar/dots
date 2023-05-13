@@ -1,0 +1,79 @@
+- id: '1660258326868'
+  name: Movie Mode
+  entities:
+    light.hallway_light:
+      effect_list:
+      - None
+      - candle
+      supported_color_modes:
+      - brightness
+      mode: normal
+      dynamics: none
+      friendly_name: Hallway Light
+      supported_features: 44
+      state: 'off'
+    light.kitchen:
+      min_mireds: 153
+      max_mireds: 454
+      supported_color_modes:
+      - color_temp
+      is_hue_group: true
+      hue_scenes: []
+      hue_type: room
+      lights:
+      - Kitchen Light 1
+      - Kitchen Light 4
+      - Kitchen Light 2
+      - Kitchen Light 5
+      - Kitchen Light 3
+      dynamics: false
+      icon: mdi:lightbulb-group
+      friendly_name: Kitchen
+      supported_features: 40
+      state: 'off'
+    light.lamp:
+      min_mireds: 153
+      max_mireds: 500
+      effect_list:
+      - None
+      - candle
+      - fire
+      supported_color_modes:
+      - color_temp
+      - xy
+      color_mode: xy
+      brightness: 128
+      hs_color:
+      - 10.118
+      - 100
+      rgb_color:
+      - 255
+      - 43
+      - 0
+      xy_color:
+      - 0.6915
+      - 0.3083
+      effect: None
+      mode: normal
+      dynamics: none
+      friendly_name: Lamp
+      supported_features: 44
+      state: 'on'
+    light.living_room:
+      min_mireds: 153
+      max_mireds: 454
+      supported_color_modes:
+      - color_temp
+      is_hue_group: true
+      hue_scenes: []
+      hue_type: room
+      lights:
+      - 'Living Room Light 2 '
+      - Living Room Light 1
+      dynamics: false
+      icon: mdi:lightbulb-group
+      friendly_name: Living Room
+      supported_features: 40
+      state: 'off'
+  icon: mdi:projector-screen-outline
+  metadata: {}

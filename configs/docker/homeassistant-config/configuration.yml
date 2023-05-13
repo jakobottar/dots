@@ -1,0 +1,35 @@
+
+# Loads default set of integrations. Do not remove.
+default_config:
+
+homeassistant:
+  latitude: 40.0
+  longitude: -111.0
+  elevation: 4265
+  unit_system: imperial
+  time_zone: America/Denver
+
+http:
+  use_x_forwarded_for: true
+  trusted_proxies:
+    - 172.23.0.0/16
+
+# Text to speech
+tts:
+  - platform: google_translate
+
+automation: !include automations.yaml
+script: !include scripts.yaml
+scene: !include scenes.yaml
+
+# adaptive lighting setup
+adaptive_lighting:
+  - name: "Adaptive Lighting"
+    lights:
+    - light.jakob_s_room
+    - light.lamp
+    - light.kitchen
+    - light.living_room
+    - light.hallway
+    min_brightness: 33
+    take_over_control: True

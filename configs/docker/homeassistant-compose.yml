@@ -1,0 +1,33 @@
+networks:
+  traefik_web:
+    external: true
+
+services:
+  homeassistant:
+    container_name: homeassistant
+
+    image: "ghcr.io/home-assistant/home-assistant:stable"
+
+    volumes:
+      - ./config:/config
+      - /etc/localtime:/etc/localtime:ro
+
+    networks:
+      - traefik_web
+
+    devices:
+      - /dev/ttyACM0:/dev/ttyACM0
+
+    privileged: true
+
+    environment:
+      - TZ=America/Denver
+
+    labels:
+      - traefik.enable=true
+      - traefik.http.routers.ha.rule=Host(`ha.jakobj.dev`)
+      - traefik.http.routers.ha.entrypoints=websecure
+      - traefik.http.services.ha.loadbalancer.server.port=8123
+      - traefik.http.routers.ha.tls.certresolver=mycerts
+
+    restart: unless-stopped
