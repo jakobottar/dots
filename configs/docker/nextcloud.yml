@@ -1,0 +1,37 @@
+# traefik nextcloud config file 
+
+http:
+    routers:
+        nextcloud:
+            rule: "Host(`nc.jakobj.dev`)"
+            entrypoints:
+                - "websecure"
+            service: nextcloud
+            middlewares:
+                - nextcloud-chain
+            tls:
+                certresolver: "mycerts"
+
+    services:
+        nextcloud:
+            loadBalancer:
+                servers:
+                    - url: "http://192.168.86.197:11000"
+
+    middlewares:
+        nextcloud-secure-headers:
+            headers:
+                hostsProxyHeaders:
+                    - "X-Forwarded-Host"
+                referrerPolicy: "same-origin"
+
+        https-redirect:
+            redirectscheme:
+                scheme: https 
+
+        nextcloud-chain:
+            chain:
+                middlewares:
+                    - https-redirect
+                    - nextcloud-secure-headers
+                    
