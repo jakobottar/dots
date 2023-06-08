@@ -80,7 +80,7 @@ set $lock swaylock \
 ### Output configuration
 
     # wallpaper
-    output * bg ~/Photos/Wallpapers/Landscapes/arches-sunrise.jpg fill
+    output * bg ~/photos/Wallpapers/Landscapes/arches-sunrise.jpg fill
 
     # clamshell mode https://github.com/swaywm/sway/wiki#clamshell-mode
     set $laptop eDP-1
@@ -249,7 +249,7 @@ bindsym $mod+r mode "resize"
     exec --no-startup-id autotiling
     exec --no-startup-id swaync -c ~/.config/swaync/config.json
     exec --no-startup-id blueman-applet
-    exec --no-startup-id dropbox
+    exec --no-startup-id nextcloud --background
     # exec --no-startup-id sudo anacron # need to add anacron to PASSWORDLESS in sudoers file https://unix.stackexchange.com/questions/248485/allow-all-commands-via-sudo-but-nopasswd-for-specific-commands/248495#248495
 
 # Theme

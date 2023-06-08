@@ -27,7 +27,7 @@ alias ls='exa'
 alias neofetch='flashfetch'
 
 # borg backup
-export BORG_REPO=ssh://bacman@jakobj.dev:1985//backups/$HOST
+export BORG_REPO=ssh://jakobj@jakobj.dev//hdd/borg-backup/$HOST
 
 # pyenv
 eval "$(pyenv init -)"
