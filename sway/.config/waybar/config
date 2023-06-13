@@ -11,6 +11,7 @@
     ],
     "modules-right": [
         "clock",
+        "custom/pomo",
         "network",
         "cpu",
         "pulseaudio",
@@ -19,6 +20,12 @@
     ],
     "sway/window": {
         "max-length": 50
+    },
+    "custom/pomo": {
+        "exec": "pomo clock",
+        "on-click": "pomo pause",
+        "format": "⏳{}",
+        "interval": 1
     },
     "clock": {
         "format": "{:%a %b %d  %I:%M %p}"

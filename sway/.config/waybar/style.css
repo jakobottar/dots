@@ -45,6 +45,7 @@ window#waybar {
     border-bottom: 3px solid #ffffff;
 }
 
+#custom-pomo,
 #clock,
 #battery,
 #temperature,
@@ -106,6 +107,10 @@ window#waybar {
 
 label:focus {
     background-color: #000000;
+}
+
+#custom-pomo {
+    background-color: @maroon;
 }
 
 #network {
