@@ -250,7 +250,8 @@ bindsym $mod+r mode "resize"
     exec --no-startup-id swaync -c ~/.config/swaync/config.json
     exec --no-startup-id blueman-applet
     exec --no-startup-id nextcloud --background
-    # exec --no-startup-id sudo anacron # need to add anacron to PASSWORDLESS in sudoers file https://unix.stackexchange.com/questions/248485/allow-all-commands-via-sudo-but-nopasswd-for-specific-commands/248495#248495
+    exec pomo notify
+    exec --no-startup-id sudo anacron # need to add anacron to PASSWORDLESS in sudoers file https://unix.stackexchange.com/questions/248485/allow-all-commands-via-sudo-but-nopasswd-for-specific-commands/248495#248495
 
 # Theme
     # window color      border      background  text    indicator

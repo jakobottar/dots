@@ -11,7 +11,7 @@ curl https://github.com/username.keys | tee ~/.ssh/authorized_keys
 tar zip with all cpus:
 
 ```bash
-tar -c -I 'xz -9 -T0' -f archive.tar.xz dir/
+tar -c -I 'xz -6 -T0' -f archive.tar.xz dir/
 ```
 
 ## tmux
