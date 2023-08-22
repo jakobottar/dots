@@ -16,6 +16,9 @@ alias dcb='docker-compose build'
 alias dcu='docker-compose up -d'
 alias dcd='docker-compose down'
 
+alias sb='sbatch'
+alias sq='squeue -u u0972673'
+
 alias vpn='protonvpn-cli'
 alias myip='curl ipinfo.io/ip'
 alias shutdown='shutdown now'
