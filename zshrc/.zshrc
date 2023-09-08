@@ -26,7 +26,7 @@ alias p='ping -i 0.2 -O sci.utah.edu'
 alias zzz='systemctl hibernate'
 alias todo='vim ~/TODO.txt'
 
-alias ls='exa'
+alias ls='eza'
 alias neofetch='flashfetch'
 
 # borg backup
