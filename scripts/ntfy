@@ -3,7 +3,7 @@
 # usage: ntfy <message> <command>
 
 # make a ntfy topic and set it here
-url="ntfy.sh/sci-run-noti" 
+url="ntfy.sh/LZrLo7AiZum3cLpk" 
 
 # send message upon completion or failure
 ntfy_me() {
