@@ -3,8 +3,11 @@
 # Setting this, so the repo does not need to be given on the commandline:
 export BORG_REPO=ssh://jakobj@jakobj.dev//hdd/borg-backup/{hostname}
 
+# get config from ~/.config/scripts.conf
+. ~/.config/scripts.conf
+
 # See the section "Passphrase notes" for more infos.
-export BORG_PASSPHRASE='supersecret'
+export BORG_PASSPHRASE=$borg_passphrase
 
 # some helpers and error handling:
 info() { printf "\n%s %s\n\n" "$( date )" "$*" >&2; }

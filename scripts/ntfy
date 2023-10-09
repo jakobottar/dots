@@ -2,8 +2,8 @@
 # uses ntfy.sh to push-notify on script run/failure
 # usage: ntfy <message> <command>
 
-# make a ntfy topic and set it here
-url="ntfy.sh/LZrLo7AiZum3cLpk" 
+# get config from ~/.config/scripts.conf
+. ~/.config/scripts.conf
 
 # send message upon completion or failure
 ntfy_me() {
@@ -13,7 +13,7 @@ ntfy_me() {
 			-H "Title: Run Failed!" \
 			-H "Tags: facepalm" \
 			-d "Run ${2} failed, you should go check it." \
-			$url > /dev/null
+			$ntfy_url > /dev/null
 		exit $1
 	fi
 
@@ -22,7 +22,7 @@ ntfy_me() {
 		-H "Title: Run Finished Successfully!" \
 		-H "Tags: partying_face" \
 		-d "Run ${2} finished." \
-		$url
+		$ntfy_url
 }
 
 if [ $# -lt 2 ]; then 

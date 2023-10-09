@@ -80,7 +80,7 @@ set $lock swaylock \
 ### Output configuration
 
     # wallpaper
-    output * bg ~/photos/Wallpapers/Landscapes/arches-sunrise.jpg fill
+    output * bg ~/Photos/Wallpapers/Landscapes/arches-sunrise.jpg fill
 
     # clamshell mode https://github.com/swaywm/sway/wiki#clamshell-mode
     set $laptop eDP-1
