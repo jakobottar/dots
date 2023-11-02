@@ -1,39 +1,98 @@
-#!/bin/bash
+#! /bin/bash
+
 # uses ntfy.sh to push-notify on script run/failure
 # usage: ntfy <message> <command>
+# message must be in quotes or a single word
 
-# get config from ~/.config/scripts.conf
-. ~/.config/scripts.conf
+#==============================================================================
+# config: ~/.config/ntfy.yml
+# # ntfy url
+# url: ntfy.sh/test-url
+
+# # notification title
+# title:
+#   success: Success!
+#   failure: Failure!
+
+# # emoji
+# tag:
+#   success: partying_face
+#   failure: facepalm
+
+# # notification message format
+# # used as message: message_format
+# message_format: 
+#   success: "Run finished."
+#   failure: "Run failed, you should go check it."
+#==============================================================================
+config_file_name="$HOME/.config/ntfy.yml"
+
+# parse yaml function
+# from https://stackoverflow.com/a/21189044
+function parse_yaml {
+   local prefix=$2
+   local s='[[:space:]]*' w='[a-zA-Z0-9_]*' fs=$(echo @|tr @ '\034')
+   sed -ne "s|^\($s\):|\1|" \
+        -e "s|^\($s\)\($w\)$s:$s[\"']\(.*\)[\"']$s\$|\1$fs\2$fs\3|p" \
+        -e "s|^\($s\)\($w\)$s:$s\(.*\)$s\$|\1$fs\2$fs\3|p"  $1 |
+   awk -F$fs '{
+      indent = length($1)/2;
+      vname[indent] = $2;
+      for (i in vname) {if (i > indent) {delete vname[i]}}
+      if (length($3) > 0) {
+         vn=""; for (i=0; i<indent; i++) {vn=(vn)(vname[i])("_")}
+         printf("%s%s%s=\"%s\"\n", "'$prefix'",vn, $2, $3);
+      }
+   }'
+}
 
 # send message upon completion or failure
 ntfy_me() {
-	# if exit status is nonzero, notify me the run failed
+
+	# if exit status is nonzero, notify me the program failed
 	if [ $1 -ne 0 ]; then
 		curl -s \
-			-H "Title: Run Failed!" \
-			-H "Tags: facepalm" \
-			-d "Run ${2} failed, you should go check it." \
-			$ntfy_url > /dev/null
+			-H "Title: $config_title_failure" \
+			-H "Tags: $config_tag_failure" \
+			-d "$message_body: $config_message_format_failure" \
+			$config_url > /dev/null
 		exit $1
 	fi
 
-	# otherwise, notify me the run is done 
+	# otherwise, notify me the program completed successfully 
 	curl -s \
-		-H "Title: Run Finished Successfully!" \
-		-H "Tags: partying_face" \
-		-d "Run ${2} finished." \
-		$ntfy_url
+		-H "Title: $config_title_success" \
+		-H "Tags: $config_tag_success" \
+		-d "$message_body: $config_message_format_success" \
+		$config_url
 }
 
+# set default configs
+config_url=""
+config_title_success="Success!"
+config_title_failure="Failure!"
+config_tag_success="partying_face"
+config_tag_failure="facepalm"
+config_message_format_success="finished"
+config_message_format_failure="failed"
+
+# get config file
+if [ -f $config_file_name ]; then
+    eval $(parse_yaml $config_file_name "config_")
+fi
+
+# check if there are enough arguments
 if [ $# -lt 2 ]; then 
     echo "ntfy: please specify at least two args: message & program"
     exit -1
 fi
 
-# get ntfy message/run name
-msg="$1"
+# get ntfy message
+message_body=$1
 shift
 
-# run command and notify based on return value
+# run command and get exit status
 eval "$@"
-ntfy_me "$?" "$msg" > /dev/null
+
+# notify me
+ntfy_me $? > /dev/null
