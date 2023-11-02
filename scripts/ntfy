@@ -6,7 +6,7 @@
 
 #==============================================================================
 # config: ~/.config/ntfy.yml
-# # ntfy url
+# # ntfy URL (https://ntfy.sh/)
 # url: ntfy.sh/test-url
 
 # # notification title
