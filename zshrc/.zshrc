@@ -32,10 +32,6 @@ alias neofetch='flashfetch'
 # borg backup
 export BORG_REPO=ssh://jakobj@jakobj.dev//hdd/borg-backup/$HOST
 
-# pyenv
-# eval "$(pyenv init -)"
-# eval "$(pyenv virtualenv-init -)"
-
 # conda
 # make sure to run 'conda config --set auto_activate_base false' to disable auto-activation
 [ -f /opt/miniconda3/etc/profile.d/conda.sh ] && source /opt/miniconda3/etc/profile.d/conda.sh
