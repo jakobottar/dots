@@ -64,7 +64,7 @@ alias sb="sbatch"
 alias sq="squeue -u $USER"
 # TODO: these need more work
 # alias sca="scancel -u $USER"
-alias scl="squeue -u $USER -h | awk 'NR == 1  {print $1}' | xargs scancel" # cancel latest job
+alias scl="squeue -u $USER -o "%18i" -h | awk 'NR == 1  {print $1}' | xargs scancel" # cancel latest job
 
 # personal laptop aliases
 if [[ "$HOST" == "capitol-reef" ]]; then
