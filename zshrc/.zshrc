@@ -1,40 +1,104 @@
-# oh-my-zsh
-export ZSH="$HOME/.oh-my-zsh"
-ZSH_THEME="jakobj" # https://gist.github.com/jakobottar/f68b43af1ce7276f30fb257c611a1289
-plugins=(git)
-source $ZSH/oh-my-zsh.sh
-export QT_STYLE_OVERRIDE=""
+##################################
+## jakob's multi-use zsh config ##
+##################################
 
-# aliases
-alias gs='git fetch; git status'
-alias ga='git add -A; git status'
-alias gc='git commit -S -m'
-alias gcf='git commit -S --fixup'
-alias gp='git push'
+# load oh-my-zsh on devices with it
+if [ -d "$HOME/.oh-my-zsh" ]; then
+    echo "loading oh-my-zsh"
+    export ZSH="$HOME/.oh-my-zsh"
+    ZSH_THEME="jakobj" # https://gist.github.com/jakobottar/f68b43af1ce7276f30fb257c611a1289
+    plugins=(git)
+    source $ZSH/oh-my-zsh.sh
+    export QT_STYLE_OVERRIDE=""
+else 
+    echo "setting a simple prompt"
+    PROMPT='%F{7}%m%f %F{1}::%f %F{2}%B%~%b%f %F{4}>%f '
+fi
 
-alias dcb='docker-compose build'
-alias dcu='docker-compose up -d'
-alias dcd='docker-compose down'
+#### set up zsh autocomplete ####
+echo "load autocomplete configs"
 
-alias sb='sbatch'
-alias sq='squeue -u u0972673'
+zstyle ':completion:*' completer _expand _complete _ignored _approximate
+zstyle ':completion:*' list-colors ''
+zstyle :compinstall filename "$HOME/.zshrc"
 
-alias vpn='protonvpn-cli'
-alias myip='curl ipinfo.io/ip'
-alias shutdown='shutdown now'
-alias p='ping -i 0.2 -O www.utah.edu'
-alias zzz='systemctl hibernate'
-alias todo='vim ~/TODO.txt'
+autoload -Uz compinit
+compinit
 
-alias ls='eza'
-alias neofetch='flashfetch'
+HISTFILE=~/.histfile
+HISTSIZE=2000
+SAVEHIST=2000
+bindkey -e
 
-# borg backup
-export BORG_REPO=ssh://jakobj@jakobj.dev//hdd/borg-backup/$HOST
+#### search through history with arrow keys ####
+autoload -U up-line-or-beginning-search
+autoload -U down-line-or-beginning-search
+zle -N up-line-or-beginning-search
+zle -N down-line-or-beginning-search
+bindkey "^[[A" up-line-or-beginning-search # Up
+bindkey "^[[B" down-line-or-beginning-search # Down
 
-# conda
-# make sure to run 'conda config --set auto_activate_base false' to disable auto-activation
-[ -f /opt/miniconda3/etc/profile.d/conda.sh ] && source /opt/miniconda3/etc/profile.d/conda.sh
+#### misc settings ####
+export EDITOR="vim"
 
-# launch keychain
-eval $(keychain --eval --quiet id_ed25519)
+#### aliases ####
+# general stuff
+echo "loading general use aliases"
+alias gs="git fetch; git status"
+alias ga="git add -A; git status"
+alias gc="git commit -m"
+alias gcf="git commit --fixup"
+alias gp="git push"
+alias l="ls -lah"
+
+alias dcb="docker-compose build"
+alias dcu="docker-compose up -d"
+alias dcd="docker-compose down"
+
+alias sb="sbatch"
+alias sq="squeue -u $USER"
+
+# personal laptop aliases
+if [[ "$HOST" == "capitol-reef" ]]; then
+    echo "loading 'capitol-reef' aliases and configs"
+    alias vpn="protonvpn-cli"
+    alias myip="curl ipinfo.io/ip"
+    alias shutdown="shutdown now"
+    alias p="ping -i 0.2 -O www.utah.edu"
+    alias zzz="systemctl hibernate"
+    alias todo="vim ~/TODO.txt"
+
+    alias ls="eza"
+    alias neofetch="flashfetch"
+
+    # borg backup reop
+    export BORG_REPO=ssh://jakobj@jakobj.dev//hdd/borg-backup/$HOST
+
+    # unlock ssh keychain
+    eval $(keychain --eval --quiet id_ed25519)
+fi
+
+#### conda ####
+# make sure to run "conda config --set auto_activate_base false" to disable auto-activation
+if [ -f ~/miniconda3/etc/profile.d/conda.sh ]; then
+    echo "loading miniconda"
+    source ~/miniconda3/etc/profile.d/conda.sh
+fi
+
+if [[ $USER == "john665" ]]; then
+    echo "loading PNNL configs"
+
+    # enable https proxy for pip
+    export HTTPS_PROXY="http://proxy01.pnl.gov:3128"
+
+    if [[ "$SYSTEM_NAME" == "deception" ]]; then
+        echo "loading 'deception' configs"
+        module load cuda/12.1
+        module load python/miniconda24.4.0
+
+        source /share/apps/python/miniconda24.4.0/etc/profile.d/conda.sh
+    fi
+fi
+
+clear 
+echo "Welcome, Jakob."
