@@ -20,6 +20,7 @@ echo "load autocomplete configs"
 
 zstyle ':completion:*' completer _expand _complete _ignored _approximate
 zstyle ':completion:*' list-colors ''
+zstyle ':completion:*' menu select
 zstyle :compinstall filename "$HOME/.zshrc"
 
 autoload -Uz compinit
