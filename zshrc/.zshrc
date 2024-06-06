@@ -1,5 +1,5 @@
 ##################################
-## jakob's multi-use zsh config ##
+## Jakob's multi-use zsh config ##
 ##################################
 
 # load oh-my-zsh on devices with it
@@ -45,19 +45,26 @@ export EDITOR="vim"
 #### aliases ####
 # general stuff
 echo "loading general use aliases"
+alias l="ls -lah"
+
+# git
 alias gs="git fetch; git status"
 alias ga="git add -A; git status"
 alias gc="git commit -m"
 alias gcf="git commit --fixup"
 alias gp="git push"
-alias l="ls -lah"
 
+# docker
 alias dcb="docker-compose build"
 alias dcu="docker-compose up -d"
 alias dcd="docker-compose down"
 
+# slurm
 alias sb="sbatch"
 alias sq="squeue -u $USER"
+# TODO: these need more work
+# alias sca="scancel -u $USER"
+alias scl="squeue -u $USER -h | awk 'NR == 1  {print $1}' | xargs scancel" # cancel latest job
 
 # personal laptop aliases
 if [[ "$HOST" == "capitol-reef" ]]; then
