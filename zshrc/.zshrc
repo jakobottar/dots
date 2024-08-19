@@ -86,6 +86,15 @@ if [[ "$HOST" == "capitol-reef" ]]; then
     eval $(keychain --eval --quiet id_ed25519)
 fi
 
+# personal desktop aliases
+if [[ "$HOST" == "zion" ]]; then
+    echo "loading 'zion' aliases and configs"
+    alias myip="curl ipinfo.io/ip"
+    alias p="ping -i 0.2 -O www.utah.edu"
+
+    alias ls="eza"
+fi
+
 #### conda ####
 # make sure to run "conda config --set auto_activate_base false" to disable auto-activation
 if [ -f ~/miniconda3/etc/profile.d/conda.sh ]; then
