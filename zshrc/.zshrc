@@ -82,6 +82,9 @@ if [[ "$HOST" == "capitol-reef" ]]; then
     # borg backup reop
     export BORG_REPO=ssh://jakobj@jakobj.dev//hdd/borg-backup/$HOST
 
+    # Load RVM into a shell session *as a function*
+    [[ -s "/usr/share/rvm/scripts/rvm" ]] && source "/usr/share/rvm/scripts/rvm" 
+
     # unlock ssh keychain
     eval $(keychain --eval --quiet id_ed25519)
 fi
@@ -95,11 +98,16 @@ if [[ "$HOST" == "zion" ]]; then
     alias ls="eza"
 fi
 
-#### conda ####
-# make sure to run "conda config --set auto_activate_base false" to disable auto-activation
-if [ -f ~/miniconda3/etc/profile.d/conda.sh ]; then
-    echo "loading miniconda"
-    source ~/miniconda3/etc/profile.d/conda.sh
+#### mamba (conda replacement) ####
+if [ -d $HOME/.micromamba ]; then
+    echo "loading mamba configs"
+    export PATH="/home/jakobj/.local/bin:$PATH"
+    export MAMBA_EXE="$HOME/.local/bin/micromamba";
+    export MAMBA_ROOT_PREFIX="$HOME/.micromamba";
+
+    eval "$($MAMBA_EXE shell hook --shell zsh --root-prefix $MAMBA_ROOT_PREFIX)"
+
+    alias m="micromamba"
 fi
 
 if [[ $USER == "john665" ]]; then
