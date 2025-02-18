@@ -74,7 +74,6 @@ if [[ "$HOST" == "capitol-reef" ]]; then
     alias shutdown="shutdown now"
     alias p="ping -i 0.2 -O www.utah.edu"
     alias zzz="systemctl hibernate"
-    alias todo="vim ~/TODO.txt"
 
     alias ls="eza"
     alias neofetch="flashfetch"
@@ -96,6 +95,13 @@ if [[ "$HOST" == "zion" ]]; then
     alias p="ping -i 0.2 -O www.utah.edu"
 
     alias ls="eza"
+fi
+
+# work aliases
+if [[ "$HOST" == "eris" || "$HOST" == "titan" || "$HOST" == "helios" || "$HOST" == "pegasus" || "$HOST" == "compute" || "$HOST" == "chimera" ]]; then
+    echo "loading SCI aliases and configs"
+    alias myip="curl ipinfo.io/ip"
+    alias p="ping -i 0.2 -O www.utah.edu"
 fi
 
 #### mamba (conda replacement) ####
@@ -125,5 +131,5 @@ if [[ $USER == "john665" ]]; then
     fi
 fi
 
-clear 
+clear
 echo "Welcome, Jakob."
