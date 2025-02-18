@@ -40,49 +40,12 @@ set $menu bemenu-run --fn $font --nb "$mantle" --nf "$text" \
                      --fb "$mantle" --ff "$text" \
                      --hb "$blue" --hf "$crust"
 
-# swaylock config
-# set $lock swaylock \
-# 	--screenshots \
-#     --grace 2 \
-#     --font "Monaspace Argon Medium" \
-#     --clock \
-#     --timestr "%-I:%M %p" \
-#     --datestr "%a %b %-d" \
-# 	--indicator-radius 100 \
-# 	--indicator-thickness 10 \
-# 	--effect-blur 5x5 \
-# 	--effect-vignette 0.75:0.75 \
-# 	--fade-in 0.2 \
-# 	--key-hl-color "$red" \
-#     \
-#     --text-color "$text" \
-# 	--line-color "$mantle" \
-# 	--separator-color "$mantle" \
-# 	--inside-color 1e203088 \
-# 	--ring-color "$green" \
-#     \
-#     --inside-ver-color 1e203088 \
-#     --ring-ver-color "$blue" \
-#     --text-ver-color "$blue" \
-#     \
-#     --inside-wrong-color 1e203088 \
-#     --ring-wrong-color "$red" \
-#     --text-wrong-color "$red" \
-#     \
-#     --inside-clear-color 1e203088 \
-#     --ring-clear-color "$mauve" \
-#     --text-clear-color "$mauve" \
-#     \
-#     --inside-caps-lock-color 1e203088 \
-#     --ring-caps-lock-color "$peach" \
-#     --text-caps-lock-color "$peach"
-
-set $lock gtklock
+set $lock gtklock --time-format "%l:%M %P"
 
 ### Output configuration
 
     # wallpaper
-    output * bg ~/Photos/Wallpapers/Landscapes/arches-sunrise.jpg fill
+    output * bg ~/Photos/Wallpapers/Landscapes/Top of Alta.jpg fill
 
     # clamshell mode https://github.com/swaywm/sway/wiki#clamshell-mode
     set $laptop eDP-1
