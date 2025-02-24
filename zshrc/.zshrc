@@ -47,6 +47,9 @@ export EDITOR="vim"
 echo "loading general use aliases"
 alias l="ls -lah"
 
+# unlock ssh keychain
+eval $(keychain --eval --quiet id_ed25519)
+
 # git
 alias gs="git fetch; git status"
 alias ga="git add -A; git status"
@@ -83,9 +86,6 @@ if [[ "$HOST" == "capitol-reef" ]]; then
 
     # Load RVM into a shell session *as a function*
     [[ -s "/usr/share/rvm/scripts/rvm" ]] && source "/usr/share/rvm/scripts/rvm" 
-
-    # unlock ssh keychain
-    eval $(keychain --eval --quiet id_ed25519)
 fi
 
 # personal desktop aliases
