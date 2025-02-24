@@ -62,13 +62,6 @@ alias dcb="docker-compose build"
 alias dcu="docker-compose up -d"
 alias dcd="docker-compose down"
 
-# slurm
-alias sb="sbatch"
-alias sq="squeue -u $USER"
-# TODO: these need more work
-# alias sca="scancel -u $USER"
-alias scl="squeue -u $USER -o "%18i" -h | awk 'NR == 1  {print $1}' | xargs scancel" # cancel latest job
-
 # personal laptop aliases
 if [[ "$HOST" == "capitol-reef" ]]; then
     echo "loading 'capitol-reef' aliases and configs"
@@ -102,6 +95,36 @@ if [[ "$HOST" == "eris" || "$HOST" == "titan" || "$HOST" == "helios" || "$HOST" 
     echo "loading SCI aliases and configs"
     alias myip="curl ipinfo.io/ip"
     alias p="ping -i 0.2 -O www.utah.edu"
+
+    # slurm
+    alias sb="sbatch"
+    alias sq="squeue -u $USER"
+    # TODO: these need more work
+    # alias sca="scancel -u $USER"
+    alias scl="squeue -u $USER -o "%18i" -h | awk 'NR == 1  {print $1}' | xargs scancel" # cancel latest job
+fi
+
+
+if [[ $USER == "john665" ]]; then
+    echo "loading PNNL configs"
+
+    # enable https proxy for pip
+    export HTTPS_PROXY="http://proxy01.pnl.gov:3128"
+
+    # slurm
+    alias sb="sbatch"
+    alias sq="squeue -u $USER"
+    # TODO: these need more work
+    # alias sca="scancel -u $USER"
+    alias scl="squeue -u $USER -o "%18i" -h | awk 'NR == 1  {print $1}' | xargs scancel" # cancel latest job
+
+    if [[ "$SYSTEM_NAME" == "deception" ]]; then
+        echo "loading 'deception' configs"
+        module load cuda/12.1
+        module load python/miniconda24.4.0
+
+        source /share/apps/python/miniconda24.4.0/etc/profile.d/conda.sh
+    fi
 fi
 
 #### mamba (conda replacement) ####
@@ -114,21 +137,6 @@ if [ -d $HOME/.micromamba ]; then
     eval "$($MAMBA_EXE shell hook --shell zsh --root-prefix $MAMBA_ROOT_PREFIX)"
 
     alias m="micromamba"
-fi
-
-if [[ $USER == "john665" ]]; then
-    echo "loading PNNL configs"
-
-    # enable https proxy for pip
-    export HTTPS_PROXY="http://proxy01.pnl.gov:3128"
-
-    if [[ "$SYSTEM_NAME" == "deception" ]]; then
-        echo "loading 'deception' configs"
-        module load cuda/12.1
-        module load python/miniconda24.4.0
-
-        source /share/apps/python/miniconda24.4.0/etc/profile.d/conda.sh
-    fi
 fi
 
 clear
