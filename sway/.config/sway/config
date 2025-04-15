@@ -42,6 +42,13 @@ set $menu bemenu-run --fn $font --nb "$mantle" --nf "$text" \
 
 set $lock gtklock --time-format "%l:%M %P"
 
+# Idle configuration
+# 5 min lock, 30 min sleep
+exec swayidle -w timeout 300 'gtklock --time-format "%l:%M %P"' \
+    timeout 1800 'swaymsg "output * dpms off"' \
+    resume 'swaymsg "output * dpms on"' \
+    before-sleep 'gtklock --time-format "%l:%M %P"'
+
 ### Output configuration
 
     # wallpaper
@@ -238,11 +245,3 @@ bindsym $mod+r mode "resize"
     bar {
         swaybar_command waybar
     } 
-
-# Idle configuration
-    # 5 min lock, 30 min sleep
-    exec swayidle -w \
-        timeout 300 $lock \
-        timeout 1800 'swaymsg "output * dpms off"' \
-        resume 'swaymsg "output * dpms on"' \
-        before-sleep $lock
