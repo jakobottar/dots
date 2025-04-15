@@ -99,6 +99,7 @@ if [[ "$HOST" == "eris" || "$HOST" == "titan" || "$HOST" == "helios" || "$HOST" 
     # slurm
     alias sb="sbatch"
     alias sq="squeue -u $USER"
+    alias si="sinfo -o '%16P %12n %.6t %.4c %.8z %.6m %12G %10l %11L' --sort=P,n"
     # TODO: these need more work
     # alias sca="scancel -u $USER"
     alias scl="squeue -u $USER -o "%18i" -h | awk 'NR == 1  {print $1}' | xargs scancel" # cancel latest job
