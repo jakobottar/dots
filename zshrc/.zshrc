@@ -46,6 +46,8 @@ export EDITOR="vim"
 # general stuff
 echo "loading general use aliases"
 alias l="ls -lah"
+alias myip="curl ipinfo.io/ip"
+alias p="ping -i 0.2 -O www.utah.edu"
 
 # unlock ssh keychain
 eval $(keychain --eval --quiet id_ed25519)
@@ -57,18 +59,11 @@ alias gc="git commit -m"
 alias gcf="git commit --fixup"
 alias gp="git push"
 
-# docker
-alias dcb="docker-compose build"
-alias dcu="docker-compose up -d"
-alias dcd="docker-compose down"
-
 # personal laptop aliases
 if [[ "$HOST" == "capitol-reef" ]]; then
     echo "loading 'capitol-reef' aliases and configs"
     alias vpn="protonvpn-cli"
-    alias myip="curl ipinfo.io/ip"
     alias shutdown="shutdown now"
-    alias p="ping -i 0.2 -O www.utah.edu"
     alias zzz="systemctl hibernate"
 
     alias ls="eza"
@@ -84,22 +79,17 @@ fi
 # personal desktop aliases
 if [[ "$HOST" == "zion" ]]; then
     echo "loading 'zion' aliases and configs"
-    alias myip="curl ipinfo.io/ip"
-    alias p="ping -i 0.2 -O www.utah.edu"
-
     alias ls="eza"
 fi
 
 # work aliases
-if [[ "$HOST" == "eris" || "$HOST" == "titan" || "$HOST" == "helios" || "$HOST" == "pegasus" || "$HOST" == "compute" || "$HOST" == "chimera" ]]; then
-    echo "loading SCI aliases and configs"
-    alias myip="curl ipinfo.io/ip"
-    alias p="ping -i 0.2 -O www.utah.edu"
-
+if [[ "$HOST" == "compute" ]]; then
+    echo "loading SCI Compute aliases and configs"
+    
     # slurm
     alias sb="sbatch"
     alias sq="squeue -u $USER"
-    alias si="sinfo -o '%16P %12n %.6t %.4c %.8z %.6m %12G %10l %11L' --sort=P,n"
+    alias si="sinfo -o '%16P %12n %.6t %.4c %.8z %16G %10l' --sort=P,n"
     # TODO: these need more work
     # alias sca="scancel -u $USER"
     alias scl="squeue -u $USER -o "%18i" -h | awk 'NR == 1  {print $1}' | xargs scancel" # cancel latest job
