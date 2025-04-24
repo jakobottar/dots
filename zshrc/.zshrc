@@ -88,6 +88,7 @@ if [[ "$HOST" == "compute" ]]; then
     
     # slurm
     alias sb="sbatch"
+    alias squeue="squeue -o '%.8i %.9P %.8j %.8u %.2t %.10M %.10l %R' --sort=P"
     alias sq="squeue -u $USER"
     alias si="sinfo -o '%16P %12n %.6t %.4c %.8z %16G %10l' --sort=P,n"
     # TODO: these need more work
