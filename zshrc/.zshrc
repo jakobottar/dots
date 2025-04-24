@@ -105,6 +105,7 @@ if [[ $USER == "john665" ]]; then
 
     # slurm
     alias sb="sbatch"
+    alias squeue="squeue -o '%.8i %.9P %.8j %.8u %.2t %.10M %.10l %R' --sort=P"
     alias sq="squeue -u $USER"
     # TODO: these need more work
     # alias sca="scancel -u $USER"
