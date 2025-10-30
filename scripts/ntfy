@@ -13,17 +13,20 @@
 # title:
 #   success: Success!
 #   failure: Failure!
+#   requeue: Requeue...
 
 # # emoji
 # tag:
 #   success: partying_face
 #   failure: facepalm
+#   requeue: repeat
 
 # # notification message format
 # # used as message: message_format
 # message_format: 
 #   success: "Run finished."
 #   failure: "Run failed, you should go check it."
+#   requeue: "Ran out of time, requeued."
 #==============================================================================
 config_file_name="$HOME/.config/ntfy.yml"
 
@@ -49,32 +52,42 @@ function parse_yaml {
 # send message upon completion or failure
 ntfy_me() {
 
-	# if exit status is nonzero, notify me the program failed
-	if [ $1 -ne 0 ]; then
-		curl -s \
-			-H "Title: $config_title_failure" \
-			-H "Tags: $config_tag_failure" \
-			-d "$message_body: $config_message_format_failure" \
-			$config_url > /dev/null
-		exit $1
-	fi
+   # if the exit status is 0, notify success
+   if [ $1 -eq 0 ]; then 
+      curl -s \
+         -H "Title: $config_title_success" \
+         -H "Tags: $config_tag_success" \
+         -d "$message_body: $config_message_format_success" \
+         $config_url
 
-	# otherwise, notify me the program completed successfully 
-	curl -s \
-		-H "Title: $config_title_success" \
-		-H "Tags: $config_tag_success" \
-		-d "$message_body: $config_message_format_success" \
-		$config_url
+   # if the exit status is 99, notify requeue
+   elif [ $1 -eq 99 ]; then
+      curl -s \
+         -H "Title: $config_title_requeue" \
+         -H "Tags: $config_tag_requeue" \
+         -d "$message_body: $config_message_format_requeue" \
+         $config_url
+   else
+      # otherwise, notify failure
+      curl -s \
+         -H "Title: $config_title_failure" \
+         -H "Tags: $config_tag_failure" \
+         -d "$message_body: $config_message_format_failure" \
+         $config_url
+   fi
 }
 
 # set default configs
 config_url=""
 config_title_success="Success!"
 config_title_failure="Failure!"
+config_title_requeue="Requeue..."
 config_tag_success="partying_face"
 config_tag_failure="facepalm"
+config_tag_requeue="repeat"
 config_message_format_success="finished"
 config_message_format_failure="failed"
+config_message_format_requeue="requeued"
 
 # get config file
 if [ -f $config_file_name ]; then
@@ -83,16 +96,12 @@ fi
 
 # check if there are enough arguments
 if [ $# -lt 2 ]; then 
-    echo "ntfy: please specify at least two args: message & program"
+    echo "ntfy: please specify at least two args: message & return code"
     exit -1
 fi
 
 # get ntfy message
 message_body=$1
-shift
-
-# run command and get exit status
-eval "$@"
 
 # notify me
-ntfy_me $? > /dev/null
+ntfy_me $2 > /dev/null
