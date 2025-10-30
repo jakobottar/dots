@@ -49,9 +49,6 @@ alias l="ls -lah"
 alias myip="curl ipinfo.io/ip"
 alias p="ping -i 0.2 -O www.utah.edu"
 
-# unlock ssh keychain
-eval $(keychain --eval --quiet id_ed25519)
-
 # git
 alias gs="git fetch; git status"
 alias ga="git add -A; git status"
@@ -69,7 +66,10 @@ if [[ "$HOST" == "capitol-reef" ]]; then
     alias ls="eza"
     alias neofetch="flashfetch"
 
-    # borg backup reop
+    # unlock ssh keychain
+    eval $(keychain --eval --quiet id_ed25519)
+
+    # borg backup repo
     export BORG_REPO=ssh://jakobj@jakobj.dev//hdd/borg-backup/$HOST
 
     # Load RVM into a shell session *as a function*
