@@ -91,9 +91,9 @@ if [[ "$HOST" == "compute" ]]; then
     alias squeue="squeue -o '%.8i %.9P %.10j %.8u %.2t %.10M %.10l %R' --sort=P"
     alias sq="sjobs -u $USER"
     alias si="sinfo -o '%16P %12n %.6t %.4c %.8z %16G %10l' --sort=P,n"
-    # TODO: these need more work
-    # alias sca="scancel -u $USER"
-    alias scl="squeue -u $USER -o "%18i" -h | awk 'NR == 1  {print $1}' | xargs scancel" # cancel latest job
+    
+    # cancel latest job
+    scl() { squeue -u $USER -h -o "%.18i %.2t" | awk '$2 != "CG" {print $1}' | sort -n | tail -1 | xargs scancel; }
 fi
 
 #### mamba (conda replacement) ####
