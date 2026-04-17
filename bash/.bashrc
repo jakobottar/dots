@@ -1,43 +1,26 @@
-##################################
-## Jakob's multi-use zsh config ##
-##################################
+###################################
+## Jakob's multi-use bash config ##
+###################################
 
-# load oh-my-zsh on devices with it
-if [ -d "$HOME/.oh-my-zsh" ]; then
-    echo "loading oh-my-zsh"
-    export ZSH="$HOME/.oh-my-zsh"
-    ZSH_THEME="jakobj" # https://gist.github.com/jakobottar/f68b43af1ce7276f30fb257c611a1289
-    plugins=(git)
-    source $ZSH/oh-my-zsh.sh
-    export QT_STYLE_OVERRIDE=""
-else 
-    echo "setting a simple prompt"
-    PROMPT='%F{7}%m%f %F{1}::%f %F{2}%B%~%b%f %F{4}>%f '
-fi
+#### prompt ####
+# gray hostname :: bold green cwd blue >
+PS1='\[\e[37m\]\h\[\e[0m\] \[\e[31m\]::\[\e[0m\] \[\e[32m\]\[\e[1m\]\w\[\e[0m\] \[\e[34m\]>\[\e[0m\] '
 
-#### set up zsh autocomplete ####
+#### bash completion ####
 echo "load autocomplete configs"
-
-zstyle ':completion:*' completer _expand _complete _ignored _approximate
-zstyle ':completion:*' list-colors ''
-zstyle ':completion:*' menu select
-zstyle :compinstall filename "$HOME/.zshrc"
-
-autoload -Uz compinit
-compinit
+if [ -f /usr/share/bash-completion/bash_completion ]; then
+    source /usr/share/bash-completion/bash_completion
+elif [ -f /etc/bash_completion ]; then
+    source /etc/bash_completion
+fi
 
 HISTFILE=~/.histfile
 HISTSIZE=2000
-SAVEHIST=2000
-bindkey -e
+HISTFILESIZE=2000
 
 #### search through history with arrow keys ####
-autoload -U up-line-or-beginning-search
-autoload -U down-line-or-beginning-search
-zle -N up-line-or-beginning-search
-zle -N down-line-or-beginning-search
-bindkey "^[[A" up-line-or-beginning-search # Up
-bindkey "^[[B" down-line-or-beginning-search # Down
+bind '"\e[A": history-search-backward'
+bind '"\e[B": history-search-forward'
 
 #### misc settings ####
 export EDITOR="vim"
@@ -57,7 +40,7 @@ alias gcf="git commit --fixup"
 alias gp="git push"
 
 # personal laptop aliases
-if [[ "$HOST" == "capitol-reef" ]]; then
+if [[ "$HOSTNAME" == "capitol-reef" ]]; then
     echo "loading 'capitol-reef' aliases and configs"
     alias vpn="protonvpn-cli"
     alias shutdown="shutdown now"
@@ -70,34 +53,34 @@ if [[ "$HOST" == "capitol-reef" ]]; then
     eval $(keychain --eval --quiet id_ed25519)
 
     # borg backup repo
-    export BORG_REPO=ssh://jakobj@jakobj.dev//hdd/borg-backup/$HOST
+    export BORG_REPO=ssh://jakobj@jakobj.dev//hdd/borg-backup/$HOSTNAME
 
     # Load RVM into a shell session *as a function*
-    [[ -s "/usr/share/rvm/scripts/rvm" ]] && source "/usr/share/rvm/scripts/rvm" 
+    [[ -s "/usr/share/rvm/scripts/rvm" ]] && source "/usr/share/rvm/scripts/rvm"
 fi
 
 # personal desktop aliases
-if [[ "$HOST" == "zion" ]]; then
+if [[ "$HOSTNAME" == "zion" ]]; then
     echo "loading 'zion' aliases and configs"
     alias ls="eza"
 fi
 
 # work aliases
-if [[ "$HOST" == "compute" ]]; then
+if [[ "$HOSTNAME" == "compute" ]]; then
     echo "loading SCI Compute aliases and configs"
-    
+
     # slurm
     alias sb="sbatch"
     alias squeue="squeue -o '%.8i %.9P %.10j %.8u %.2t %.10M %.10l %R' --sort=P"
     alias sq="sjobs -u $USER"
     alias si="sinfo -o '%16P %12n %.6t %.4c %.8z %16G %10l' --sort=P,n"
-    
+
     # cancel latest job
     scl() { squeue -u $USER -h -o "%.18i %.2t" | awk '$2 != "CG" {print $1}' | sort -n | tail -1 | xargs scancel; }
 fi
 
 # darwin frontend node aliases
-if [[ "$HOST" == darwin-fe* ]]; then
+if [[ "$HOSTNAME" == darwin-fe* ]]; then
     echo "loading Darwin aliases and configs"
 
     # slurm
@@ -114,10 +97,10 @@ fi
 if [ -d $HOME/.micromamba ]; then
     echo "loading mamba configs"
     export PATH="/home/jakobj/.local/bin:$PATH"
-    export MAMBA_EXE="$HOME/.local/bin/micromamba";
-    export MAMBA_ROOT_PREFIX="$HOME/.micromamba";
+    export MAMBA_EXE="$HOME/.local/bin/micromamba"
+    export MAMBA_ROOT_PREFIX="$HOME/.micromamba"
 
-    eval "$($MAMBA_EXE shell hook --shell zsh --root-prefix $MAMBA_ROOT_PREFIX)"
+    eval "$($MAMBA_EXE shell hook --shell bash --root-prefix $MAMBA_ROOT_PREFIX)"
 
     alias m="micromamba"
 fi
