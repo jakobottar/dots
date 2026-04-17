@@ -103,7 +103,7 @@ if [[ "$HOST" == darwin-fe* ]]; then
     # slurm
     alias sb="sbatch"
     alias squeue="squeue -o '%.8i %.9P %.10j %.8u %.2t %.10M %.10l %R' --sort=P"
-    alias sq="sjobs -u $USER"
+    alias sq="squeue -u $USER"
     alias si="sinfo -o '%16P %12n %.6t %.4c %.8z %16G %10l' --sort=P,n"
 
     # cancel latest job
